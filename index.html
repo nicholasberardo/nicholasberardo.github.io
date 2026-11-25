@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nicholas Berardo – Robot learning</title>
+<meta name="description" content="Nicholas Berardo, robotics researcher at CSEM working on bimanual manipulation and vision-language-action policies for cable insertion.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #F5F7F9;
+    --ink: #17202B;
+    --muted: #586474;
+    --rule: #D6DCE3;
+    --accent: #0E7C72;      /* signal teal */
+    --accent-soft: #D7EEEB;
+    --font: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #12171D;
+      --ink: #E6EBF0;
+      --muted: #9AA6B4;
+      --rule: #2A333D;
+      --accent: #4FC7B9;
+      --accent-soft: #173A37;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font: 400 1.0625rem/1.6 var(--font);
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+  a:hover { text-decoration-thickness: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* ---------- hero ---------- */
+  header.hero { padding: 4.5rem 0 3rem; }
+  .cable { width: 100%; height: auto; display: block; margin-bottom: 1.5rem; overflow: visible; }
+  .cable path.wire {
+    fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round;
+    stroke-dasharray: 900; stroke-dashoffset: 900;
+    animation: route 1.8s cubic-bezier(.6,.05,.3,1) .2s forwards;
+  }
+  .cable .plug { fill: var(--accent); opacity: 0; animation: seat .35s ease-out 1.9s forwards; }
+  .cable .port { fill: none; stroke: var(--muted); stroke-width: 2; }
+  @keyframes route { to { stroke-dashoffset: 0; } }
+  @keyframes seat { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    .cable path.wire { animation: none; stroke-dashoffset: 0; }
+    .cable .plug { animation: none; opacity: 1; }
+  }
+
+  h1 {
+    font-size: clamp(2.6rem, 8vw, 4.25rem); line-height: 1; font-weight: 800;
+    letter-spacing: -0.035em; margin: 0 0 1rem;
+  }
+  .lede { font-size: 1.25rem; line-height: 1.5; color: var(--muted); max-width: 36rem; margin: 0 0 1.75rem; }
+  .lede strong { color: var(--ink); font-weight: 500; }
+  .links { display: flex; flex-wrap: wrap; gap: .5rem 1.25rem; padding: 0; margin: 0; list-style: none; font-weight: 500; }
+
+  .status {
+    display: inline-block; margin-top: 1.75rem; padding: .45rem .8rem;
+    background: var(--accent-soft); color: var(--ink); border-radius: 6px; font-size: .95rem;
+  }
+
+  /* ---------- sections ---------- */
+  section { padding: 2.75rem 0; border-top: 1px solid var(--rule); }
+  h2 { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 1.25rem; }
+  h3 { font-size: 1.125rem; font-weight: 700; margin: 0 0 .25rem; letter-spacing: -0.01em; }
+  p { margin: 0 0 1rem; max-width: 40rem; }
+
+  .project { margin-bottom: 1.75rem; }
+  .project:last-child { margin-bottom: 0; }
+  .project p { color: var(--muted); margin: 0 0 .35rem; }
+  .tags { font-size: .875rem; color: var(--muted); }
+  .tags span + span::before { content: ", "; }
+
+  .pub { margin-bottom: 1.25rem; }
+  .pub .title { font-weight: 500; }
+  .pub .meta { color: var(--muted); font-size: .95rem; }
+
+  .timeline { list-style: none; margin: 0; padding: 0; }
+  .timeline li { display: grid; grid-template-columns: 7.5rem 1fr; gap: 1rem; padding: .6rem 0; }
+  .timeline .when { color: var(--muted); font-variant-numeric: tabular-nums; font-size: .95rem; padding-top: .1rem; }
+  .timeline .what span { display: block; color: var(--muted); font-size: .95rem; }
+  @media (max-width: 520px) {
+    .timeline li { grid-template-columns: 1fr; gap: 0; }
+  }
+
+  footer { padding: 2.5rem 0 4rem; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--rule); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <h1>Nicholas Berardo</h1>
+    <p class="lede">
+      Robotics researcher assistant at <strong>CSEM</strong>. M.Sc in Computer Engineering at Politecnico di Torino.
+    </p>
+    <ul class="links">
+      <li><a href="mailto:nicholas.berardo.00@gmail.com">Email</a></li>
+      <!-- <li><a href="https://github.com/YOUR-USERNAME">GitHub</a></li> -->
+      <!-- <li><a href="https://scholar.google.com/">Google Scholar</a></li> -->
+      <!-- <li><a href="https://www.linkedin.com/in/YOUR-HANDLE">LinkedIn</a></li> -->
+      <!-- <li><a href="cv.pdf">CV (PDF)</a></li> -->
+    </ul>
+
+    <!-- Remove this line if you don't want it public -->
+    <p class="status">Looking for PhD positions in robot learning.</p>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <p>
+        Currently doing an intership at CSEM on robot manipulation.
+        I work with two UR7e arms and Robotiq 2F-85
+        grippers on cable insertion where millimetre tolerances
+        make every attempt a small physics problem.
+      </p>
+      <p>
+        My research interests are in robot learning: imitation learning with vision-language-action (VLA)
+        models, world action models (WAMs) that learn how the world responds to the robot's actions,
+        reinforcement learning to push policies beyond what demonstrations alone can teach and dexterous manipulation.
+      </p>
+      <p>
+        My current pipeline goes from teleoperated demonstrations on the real robot, to fine-tuning π0.5 VLA model. I'm interested in what it takes
+        for these models to work reliably on contact-rich tasks, and in the engineering that gets them there.
+      </p>
+      <p>
+        Before CSEM I was a researcher at Politecnico di Torino where I built a synthetic dataset for anomaly segmentation. I also did my M.Sc. at Politecnico di Torino in Computer
+        Engineering and my B.Sc. at Università Degli Studi di Torino in Computer Science. I live in Luzern, Switzerland.
+      </p>
+    </div>
+  </section>
+
+  <!-- <section id="publications">
+    <div class="wrap">
+      <h2>Publications</h2>
+      <div class="pub">
+        <div class="title"><a href="#">Paper title goes here</a></div>
+        <div class="meta"><strong>N. Berardo</strong>, A. Coauthor, B. Coauthor. Venue, Year.</div>
+      </div>
+    </div>
+  </section> -->
+
+  <section id="experience">
+    <div class="wrap">
+      <h2>Experience and education</h2>
+      <ul class="timeline">
+        <li><div class="when">Jun 2026 – now</div><div class="what">Internship at CSEM, Robotics researcher<span>Bimanual manipulation, VLA policies, Reinforcement Learning</span></div></li>
+        <li><div class="when">Mar 2025 – Mar 2026</div><div class="what">Researcher, Politecnico di Torino<span>Synthetic data for anomaly segmentation, CARLA</span></div></li>
+        <li><div class="when">2022 – 2025</div><div class="what">M.Sc. Computer Engineering, Politecnico di Torino<span>Computer vision, machine learning</span></div></li>
+        <li><div class="when">2019 – 2022</div><div class="what">B.Sc. Computer Science, Università degli studi di Torino<span>Programming, Computer architecture, Networks</span></div></li>
+      </ul>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Nicholas Berardo</div>
+</footer>
+
+</body>
+</html>
